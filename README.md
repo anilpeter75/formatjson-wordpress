@@ -1,4 +1,4 @@
-=== Format JSON Online ===
+# Format JSON Online
 Contributors: anilpeter
 Tags: json, formatter, beautify, validator, developer tools
 Requires at least: 5.0
@@ -9,12 +9,12 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Format and validate JSON directly inside your WordPress dashboard. A lightweight plugin that also links to advanced tools on FormatJSONOnline.com.
 
-== Description ==
+## Description 
 
 Format JSON Online is a simple WordPress plugin that allows you to paste, format, and validate JSON directly in your WordPress admin.  
 If you need advanced features like JSON-to-CSV, JSON-to-Excel, mock API creation, or AI JSON generation, you can quickly jump to [Format JSON Online](https://www.formatjsononline.com/).
 
-**Features:**
+## Features
 * Format & beautify JSON
 * Validate JSON with one click
 * Error handling for invalid JSON
@@ -22,19 +22,10 @@ If you need advanced features like JSON-to-CSV, JSON-to-Excel, mock API creation
 * Lightweight and fast
 * Links to full online tool for advanced conversions (CSV, XML, Excel, API, AI)
 
-== Installation ==
+## Installation
 
 1. Upload the plugin folder to the `/wp-content/plugins/` directory or use the “Add Plugin” button in WordPress.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Access the plugin under **JSON Formatter** in your WordPress admin sidebar.
 
-== Screenshots ==
-1. Admin page with JSON input and formatted output.
 
-== Changelog ==
-= 1.0 =
-* Initial release – JSON formatter with validation inside WP admin.
-
-== Upgrade Notice ==
-= 1.0 =
-Initial release.
