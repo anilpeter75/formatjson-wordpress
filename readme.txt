@@ -1,9 +1,10 @@
 === Format JSON Online ===
-Contributors: anilpeter
-Tags: json, formatter, beautify, validator, developer tools
+Contributors: anilpeter75
+Donate link: https://formatjsononline.com
+Tags: json, formatter, pretty-print, developer
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 1.0
+Tested up to: 6.5
+Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
