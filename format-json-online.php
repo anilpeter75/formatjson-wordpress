@@ -1,52 +1,39 @@
 <?php
-/**
- * Plugin Name: Format JSON Online
- * Plugin URI: https://www.formatjsononline.com/
- * Description: A simple plugin that lets you format and validate JSON directly inside WordPress. Links out to the full tool at FormatJSONOnline.com.
- * Version: 1.0
- * Author: Anil Peter
- * Author URI: https://anilpeter.vercel.app
- * License: GPL2
- */
+// format-json-online.php (plugin main file)
 
-// Hook into WP Admin Menu
-add_action('admin_menu', 'fjo_add_admin_menu');
+defined( 'ABSPATH' ) || exit;
 
-function fjo_add_admin_menu() {
-    add_menu_page(
-        'Format JSON Online',
-        'JSON Formatter',
-        'manage_options',
-        'format-json-online',
-        'fjo_admin_page',
-        'dashicons-editor-code'
+function fjo_register_assets() {
+    $ver = '0.1.1';
+
+    // Register and enqueue stylesheet
+    wp_register_style(
+        'fjo-style',
+        plugins_url( 'assets/css/style.css', __FILE__ ),
+        array(),
+        $ver
     );
-}
+    wp_enqueue_style( 'fjo-style' );
 
-function fjo_admin_page() {
-    ?>
-    <div class="wrap">
-        <h1>Format JSON Online</h1>
-        <p>Paste your JSON below to format it. For advanced features, visit <a href="https://formatjsononline.com" target="_blank">Format JSON Online</a>.</p>
-        
-        <textarea id="json-input" style="width:100%; height:200px;"></textarea>
-        <br><br>
-        <button onclick="formatJson()">Format JSON</button>
-        <br><br>
-        <pre id="json-output" style="background:#f5f5f5; padding:10px;"></pre>
-        
-        <script>
-            function formatJson() {
-                try {
-                    const input = document.getElementById("json-input").value;
-                    const obj = JSON.parse(input);
-                    document.getElementById("json-output").textContent = JSON.stringify(obj, null, 2);
-                } catch (e) {
-                    document.getElementById("json-output").textContent = "Invalid JSON!";
-                }
-            }
-        </script>
-    </div>
-    <?php
+    // Register script (in footer)
+    wp_register_script(
+        'fjo-frontend',
+        plugins_url( 'assets/js/frontend.js', __FILE__ ),
+        array( 'jquery' ), // dependencies
+        $ver,
+        true // load in footer
+    );
+    wp_enqueue_script( 'fjo-frontend' );
+
+    // Pass data from PHP to JS (use instead of inline JSON in template)
+    $data = array(
+        'ajax_url' => admin_url( 'admin-ajax.php' ),
+        'nonce'    => wp_create_nonce( 'fjo_nonce' ),
+    );
+    wp_localize_script( 'fjo-frontend', 'fjoData', $data );
+
+    // If you need small inline JS, add it (no <script> tags) attached to handle:
+    $inline_js = 'console.log("FJO initialized");';
+    wp_add_inline_script( 'fjo-frontend', $inline_js );
 }
-?>
+add_action( 'wp_enqueue_scripts', 'fjo_register_assets' );
